@@ -58,7 +58,10 @@ nav ul li a:hover{color:#00b4d8;}
 .proj-card{background:#1a1a1a;border-radius:20px;padding:30px;transition:0.3s;border:1px solid #333;}
 .proj-card:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(0,180,216,0.3);border-color:#00b4d8;}
 .proj-card h3{color:#00b4d8;margin-bottom:15px;font-size:1.5rem;}
+.proj-card h3 .project-tag{background:#0077b6;color:white;font-size:0.8rem;padding:3px 8px;border-radius:4px;margin-left:10px;vertical-align:middle;}
 .proj-card p{color:#ccc;line-height:1.6;margin-bottom:20px;}
+.proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
+.tech-tag{background:#333;color:#00b4d8;padding:5px 12px;border-radius:15px;font-size:0.85rem;}
 .proj-links{display:flex;gap:10px;}
 .proj-links a{padding:10px 16px;border-radius:12px;font-weight:600;background:linear-gradient(135deg,#00b4d8,#0077b6);color:#fff;text-decoration:none;transition:0.25s;font-size:0.9rem;}
 .proj-links a:hover{transform:translateY(-4px);box-shadow:0 6px 18px rgba(0,180,216,0.4);}
@@ -254,7 +257,41 @@ footer .footer-icons a:hover{color:#00b4d8;}
   <h2>My Projects</h2>
   <div class="projects-container">
     <div class="proj-card">
+      <h3>DNA & RNA Sequence Analyzer <span class="project-tag">SDP 101</span></h3>
+      <div class="proj-tech">
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">Bioinformatics</span>
+        <span class="tech-tag">Algorithms</span>
+      </div>
+      <p>A bioinformatics tool that analyzes DNA and RNA sequences. Features include sequence alignment, GC content calculation, motif finding, and mutation detection. Implements string manipulation algorithms for biological data analysis.</p>
+      <div class="proj-links">
+        <a href="https://github.com/imran8380" target="_blank">View Code</a>
+        <a href="#contact">Learn More</a>
+      </div>
+    </div>
+    
+    <div class="proj-card">
+      <h3>Automatic Street Light Control <span class="project-tag">EEE 101</span></h3>
+      <div class="proj-tech">
+        <span class="tech-tag">Arduino</span>
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">IR Sensor</span>
+        <span class="tech-tag">Embedded Systems</span>
+      </div>
+      <p>An energy-efficient automatic street light system using IR sensors to detect vehicle/pedestrian movement. Lights turn on automatically when motion is detected and turn off after a delay to save electricity. Features light intensity adjustment based on ambient conditions.</p>
+      <div class="proj-links">
+        <a href="https://github.com/imran8380" target="_blank">View Code</a>
+        <a href="#contact">Learn More</a>
+      </div>
+    </div>
+    
+    <div class="proj-card">
       <h3>Bank Management System</h3>
+      <div class="proj-tech">
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">OOP</span>
+        <span class="tech-tag">File Handling</span>
+      </div>
       <p>A console-based banking application implementing OOP concepts in C++ with features like account management, transactions, balance checking, and user authentication system.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
@@ -264,6 +301,11 @@ footer .footer-icons a:hover{color:#00b4d8;}
     
     <div class="proj-card">
       <h3>Student Record System</h3>
+      <div class="proj-tech">
+        <span class="tech-tag">Java</span>
+        <span class="tech-tag">File I/O</span>
+        <span class="tech-tag">Data Structures</span>
+      </div>
       <p>Java application for managing student records with features like add, delete, update, search, and save data to files. Implements data structures and file handling.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
@@ -273,6 +315,11 @@ footer .footer-icons a:hover{color:#00b4d8;}
     
     <div class="proj-card">
       <h3>Library Management System</h3>
+      <div class="proj-tech">
+        <span class="tech-tag">C</span>
+        <span class="tech-tag">File Handling</span>
+        <span class="tech-tag">Database</span>
+      </div>
       <p>C program for library book management with features like book search by title/author, issue/return system, member management, and inventory tracking.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
@@ -282,6 +329,11 @@ footer .footer-icons a:hover{color:#00b4d8;}
     
     <div class="proj-card">
       <h3>Algorithm Visualizer</h3>
+      <div class="proj-tech">
+        <span class="tech-tag">C++</span>
+        <span class="tech-tag">Graphics</span>
+        <span class="tech-tag">Algorithms</span>
+      </div>
       <p>Visual representation of sorting algorithms (Bubble Sort, Quick Sort, Merge Sort) to demonstrate how different algorithms work with animated comparisons.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
