@@ -6,6 +6,11 @@
 <title>Imran | Software Developer Portfolio</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Chart.js for Analytics -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <style>
 /* Basic Reset and Fonts */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
@@ -15,10 +20,11 @@ body{background:#0d0d0d;color:white;overflow-x:hidden;transition:background 0.5s
 #particles-js{position:fixed;width:100%;height:100%;z-index:-1;}
 
 /* Theme Toggle */
-.theme-toggle{position:fixed;top:30px;right:30px;z-index:1001;}
+.theme-toggle{position:fixed;top:30px;right:30px;z-index:1001;display:flex;align-items:center;gap:10px;}
 .toggle-btn{width:60px;height:30px;background:#333;border-radius:15px;position:relative;cursor:pointer;border:none;outline:none;}
 .toggle-btn:after{content:'';position:absolute;width:26px;height:26px;background:#00b4d8;border-radius:50%;top:2px;left:2px;transition:0.3s;}
 .toggle-btn.active:after{transform:translateX(30px);background:#ffd700;}
+.theme-label{font-size:0.9rem;color:#888;}
 
 /* Navbar */
 nav{width:100%;padding:25px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(17,17,17,0.95);position:fixed;top:0;z-index:1000;transition:0.3s;backdrop-filter:blur(10px);}
@@ -51,6 +57,32 @@ nav ul li a:hover{color:#00b4d8;}
 .floating:nth-child(2){top:60%;right:15%;font-size:1.5rem;color:rgba(0,180,216,0.1);animation-delay:2s;}
 .floating:nth-child(3){bottom:30%;left:20%;font-size:1.2rem;color:rgba(0,180,216,0.1);animation-delay:4s;}
 
+/* Analytics Dashboard */
+.analytics-section{padding:80px 60px;background:#111;position:relative;}
+.analytics-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
+.analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-bottom:50px;}
+.analytics-card{background:#1a1a1a;border-radius:20px;padding:30px;border:1px solid #333;transition:0.3s;}
+.analytics-card:hover{transform:translateY(-5px);border-color:#00b4d8;box-shadow:0 10px 25px rgba(0,180,216,0.2);}
+.analytics-card h3{color:#00b4d8;margin-bottom:20px;font-size:1.5rem;}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.stat-item{text-align:center;padding:15px;background:#222;border-radius:12px;transition:0.3s;}
+.stat-item:hover{transform:translateY(-3px);background:#252525;}
+.stat-number{font-size:2rem;font-weight:700;color:#00b4d8;}
+.stat-label{font-size:0.9rem;color:#888;margin-top:5px;}
+
+/* Skills Radar Chart Container */
+.skills-chart-container{background:#1a1a1a;border-radius:20px;padding:30px;margin-top:30px;border:1px solid #333;}
+
+/* GitHub Stats Section */
+.github-stats{padding:60px;background:#0d0d0d;}
+.github-stats h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
+.stats-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+.stat-card{background:linear-gradient(135deg,#1a1a1a,#252525);border-radius:15px;padding:25px;text-align:center;border:1px solid #333;transition:0.3s;}
+.stat-card:hover{transform:translateY(-5px);border-color:#00b4d8;box-shadow:0 10px 25px rgba(0,180,216,0.2);}
+.stat-card i{font-size:2.5rem;color:#00b4d8;margin-bottom:15px;}
+.stat-card h3{font-size:1.5rem;margin-bottom:10px;color:white;}
+.stat-card p{color:#aaa;font-size:0.9rem;}
+
 /* About Section */
 .about{width:100%;padding:120px 60px;display:flex;gap:60px;align-items:center;flex-wrap:wrap;position:relative;overflow:hidden;}
 .about:before{content:'</>';position:absolute;font-size:15rem;color:rgba(0,180,216,0.03);right:-50px;bottom:-50px;transform:rotate(15deg);}
@@ -60,22 +92,17 @@ nav ul li a:hover{color:#00b4d8;}
 .about h2{font-size:3rem;margin-bottom:20px;color:#00b4d8;position:relative;display:inline-block;}
 .about h2:after{content:'';position:absolute;width:50%;height:3px;background:linear-gradient(90deg,#00b4d8,transparent);bottom:-10px;left:0;}
 .about p{font-size:1.1rem;line-height:1.7;margin-bottom:30px;}
-.tab-buttons{display:flex;gap:15px;margin-bottom:20px;}
-.tab-buttons button{padding:10px 20px;border:none;border-radius:12px;background:#222;color:white;cursor:pointer;transition:0.3s;position:relative;overflow:hidden;}
-.tab-buttons button:after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(0,180,216,0.3);border-radius:50%;transform:translate(-50%,-50%);transition:0.5s;}
-.tab-buttons button:hover:after{width:150px;height:150px;}
-.tab-buttons button.active{background:#00b4d8;color:white;box-shadow:0 5px 15px rgba(0,180,216,0.3);}
-.tab-content{display:none;animation:fadeIn 0.5s;}
-.tab-content.active{display:block;}
-.skill-item{margin-bottom:25px;opacity:0;transform:translateX(-20px);}
-.skill-item.animated{animation:slideInRight 0.5s forwards;}
-.skill-name{display:flex;justify-content:space-between;margin-bottom:8px;font-weight:600;}
-.skill-bar-container{height:12px;background:#333;border-radius:6px;overflow:hidden;position:relative;}
-.skill-bar{height:100%;background:linear-gradient(90deg,#00b4d8,#0077b6);border-radius:6px;width:0;transition:width 1.5s cubic-bezier(0.175,0.885,0.32,1.275);}
-.education-item{margin-bottom:25px;padding:20px;background:#1a1a1a;border-radius:12px;transition:transform 0.3s;border-left:4px solid transparent;}
-.education-item:hover{transform:translateX(10px);border-left-color:#00b4d8;}
-.education-item h3{color:#00b4d8;margin-bottom:5px;}
-.education-item .edu-year{color:#888;font-size:0.9rem;}
+
+/* Enhanced Skills Section */
+.skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;}
+.skill-category{background:#1a1a1a;border-radius:15px;padding:25px;border-left:4px solid #00b4d8;transition:0.3s;}
+.skill-category:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,180,216,0.2);}
+.skill-category h4{color:#00b4d8;margin-bottom:15px;font-size:1.3rem;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-tag{background:#333;color:#00b4d8;padding:8px 15px;border-radius:20px;font-size:0.9rem;transition:0.3s;position:relative;overflow:hidden;}
+.skill-tag:after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,180,216,0.2),transparent);transition:0.5s;}
+.skill-tag:hover:after{left:100%;}
+.skill-tag:hover{background:#00b4d8;color:white;transform:translateY(-3px);}
 
 /* Projects Section */
 .projects-section{padding:80px 60px;background:#111;position:relative;overflow:hidden;}
@@ -145,9 +172,15 @@ footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2)
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
 @keyframes typing{from{width:0;}to{width:100%;}}
 @keyframes blink{50%{border-color:transparent;}}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(0,180,216,0.5);}50%{box-shadow:0 0 20px rgba(0,180,216,0.8);}}
 
 /* Typewriter effect */
 .typewriter{overflow:hidden;border-right:3px solid #00b4d8;white-space:nowrap;animation:typing 3.5s steps(40,end),blink 0.75s step-end infinite;}
+
+/* Progress Bar Animation */
+.progress-bar{height:10px;background:#333;border-radius:5px;overflow:hidden;margin-top:10px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#00b4d8,#0077b6);border-radius:5px;width:0;transition:width 1.5s ease-in-out;}
 
 /* Responsive */
 @media(max-width:900px){
@@ -158,7 +191,7 @@ footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2)
   .hero h2{font-size:2rem;}
   .about{padding:80px 30px;flex-direction:column;text-align:center;}
   .about img{width:90%;height:auto;max-width:400px;}
-  .projects-section,.contact-section{padding:60px 30px;}
+  .analytics-section,.github-stats,.projects-section,.contact-section{padding:60px 30px;}
   .btns{flex-direction:column;align-items:center;}
   .btn{width:100%;max-width:250px;text-align:center;}
   .contact-card p{flex-direction:column;align-items:flex-start;gap:5px;}
@@ -171,8 +204,9 @@ footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2)
   .hero h2{font-size:1.5rem;}
   .about h2{font-size:2.5rem;}
   .contact-card,.message-card{padding:30px 20px;}
-  .projects-container{grid-template-columns:1fr;}
+  .projects-container,.analytics-grid,.stats-cards{grid-template-columns:1fr;}
   .theme-toggle{top:20px;right:20px;}
+  .skills-container{grid-template-columns:1fr;}
 }
 
 /* Light Theme */
@@ -182,11 +216,13 @@ body.light-theme nav ul li a{color:#333;}
 body.light-theme .hero h1,.body.light-theme .hero h2{color:#222;}
 body.light-theme .hero p{color:#555;}
 body.light-theme .about:before{color:rgba(0,180,216,0.08);}
-body.light-theme .proj-card,.body.light-theme .contact-card,.body.light-theme .message-card,.body.light-theme .education-item{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-color:#e0e0e0;}
+body.light-theme .proj-card,.body.light-theme .contact-card,.body.light-theme .message-card,.body.light-theme .skill-category,.body.light-theme .analytics-card,.body.light-theme .stat-card{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-color:#e0e0e0;}
 body.light-theme .proj-card p,.body.light-theme .contact-card p{color:#555;}
 body.light-theme footer{background:#fff;border-top-color:#e0e0e0;}
 body.light-theme footer p{color:#666;}
-body.light-theme .skill-bar-container{background:#e0e0e0;}
+body.light-theme .stat-item{background:#f0f0f0;}
+body.light-theme .skill-tag{background:#e0e0e0;}
+body.light-theme .progress-bar{background:#e0e0e0;}
 </style>
 </head>
 <body>
@@ -197,6 +233,7 @@ body.light-theme .skill-bar-container{background:#e0e0e0;}
 <!-- Theme Toggle -->
 <div class="theme-toggle">
   <button class="toggle-btn" id="themeToggle"></button>
+  <span class="theme-label">Theme</span>
 </div>
 
 <!-- Scroll to Top -->
@@ -208,6 +245,8 @@ body.light-theme .skill-bar-container{background:#e0e0e0;}
   <div class="logo">Imran<span> | Developer</span></div>
   <ul>
     <li><a href="#hero">Home</a></li>
+    <li><a href="#analytics">Analytics</a></li>
+    <li><a href="#github-stats">GitHub</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -226,188 +265,288 @@ body.light-theme .skill-bar-container{background:#e0e0e0;}
   <div class="btns">
     <a href="#contact" class="btn">Get In Touch</a>
     <a href="https://github.com/imran8380" target="_blank" class="btn ghost">View GitHub</a>
+    <a href="#projects" class="btn ghost">View Projects</a>
+  </div>
+</section>
+
+<section class="analytics-section" id="analytics">
+  <h2 data-aos="fade-up">Developer Analytics</h2>
+  <div class="analytics-grid" data-aos="fade-up" data-aos-delay="100">
+    <div class="analytics-card">
+      <h3><i class="fas fa-chart-line"></i> GitHub Statistics</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" id="repoCount">12</div>
+          <div class="stat-label">Repositories</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="commitCount">156</div>
+          <div class="stat-label">Commits</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="starCount">23</div>
+          <div class="stat-label">Stars</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="contributionCount">89</div>
+          <div class="stat-label">Contributions</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="analytics-card">
+      <h3><i class="fas fa-calendar-alt"></i> Code Activity</h3>
+      <canvas id="activityChart"></canvas>
+    </div>
+    
+    <div class="analytics-card">
+      <h3><i class="fas fa-project-diagram"></i> Project Status</h3>
+      <canvas id="projectChart"></canvas>
+    </div>
+    
+    <div class="analytics-card">
+      <h3><i class="fas fa-graduation-cap"></i> Learning Progress</h3>
+      <canvas id="learningChart"></canvas>
+    </div>
+  </div>
+  
+  <div class="skills-chart-container" data-aos="fade-up" data-aos-delay="200">
+    <h3><i class="fas fa-radar"></i> Technical Skills Radar</h3>
+    <canvas id="skillsRadarChart"></canvas>
+  </div>
+</section>
+
+<section class="github-stats" id="github-stats">
+  <h2 data-aos="fade-up">GitHub Development Skills</h2>
+  <div class="stats-cards" data-aos="fade-up" data-aos-delay="100">
+    <div class="stat-card">
+      <i class="fab fa-git-alt"></i>
+      <h3>Git Mastery</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 85%"></div>
+      </div>
+      <p>Branch management, merging, conflict resolution</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-code-branch"></i>
+      <h3>Version Control</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 90%"></div>
+      </div>
+      <p>Commit strategies, pull requests, code reviews</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-users"></i>
+      <h3>Collaboration</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 80%"></div>
+      </div>
+      <p>Team workflow, issue tracking, documentation</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-tools"></i>
+      <h3>Development Tools</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 88%"></div>
+      </div>
+      <p>VS Code, Linux, Git, debugging tools</p>
+    </div>
+  </div>
+  
+  <div class="stats-cards" style="margin-top: 30px;" data-aos="fade-up" data-aos-delay="200">
+    <div class="stat-card">
+      <i class="fas fa-brain"></i>
+      <h3>Problem Solving</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 92%"></div>
+      </div>
+      <p>Algorithm design, debugging, optimization</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-cogs"></i>
+      <h3>OOP Concepts</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 87%"></div>
+      </div>
+      <p>Classes, inheritance, polymorphism, design patterns</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-database"></i>
+      <h3>Data Structures</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 85%"></div>
+      </div>
+      <p>Arrays, linked lists, trees, algorithms</p>
+    </div>
+    
+    <div class="stat-card">
+      <i class="fas fa-rocket"></i>
+      <h3>Continuous Learning</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 95%"></div>
+      </div>
+      <p>New technologies, frameworks, best practices</p>
+    </div>
   </div>
 </section>
 
 <section class="about" id="about">
-  <!-- আপনার প্রোফাইল ফটো -->
-  <img src="https://drive.google.com/thumbnail?id=1Yno42fLJp1iR4il-CE5dAFsG2Enwidnc&sz=w1000" 
+  <!-- আপনার নতুন প্রোফাইল ফটো -->
+  <img src="https://drive.google.com/thumbnail?id=1RAsgyKVKaTkjJ25gkK0X2n7rCk3YDk2O&sz=w1000" 
        alt="Imran" 
        width="420" 
        height="520"
        style="border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.3);object-fit:cover;transition:transform 0.5s;animation:fadeInLeft 1s forwards;"
        onmouseover="this.style.transform='scale(1.02) rotate(1deg)'"
-       onmouseout="this.style.transform='scale(1)'">
+       onmouseout="this.style.transform='scale(1)'"
+       data-aos="fade-right">
   
-  <div class="text-box">
+  <div class="text-box" data-aos="fade-left">
     <h2>About Me</h2>
     <p>I am <strong>Imran</strong>, a dedicated software developer with strong programming fundamentals in C, C++, and Java. I have experience with development tools like Git, VS Code, Linux, and CodeBlocks. My passion lies in turning complex problems into efficient, well-structured solutions through clean code and logical thinking.</p>
     
-    <div class="tab-buttons">
-      <button class="active" data-tab="skills">Skills</button>
-      <button data-tab="education">Education</button>
-      <button data-tab="interests">Interests</button>
-    </div>
-    
-    <div class="tab-content active" id="skills">
-      <div class="skill-item" data-width="90%">
-        <div class="skill-name">
-          <span>C Programming</span>
-          <span>90%</span>
-        </div>
-        <div class="skill-bar-container">
-          <div class="skill-bar"></div>
+    <div class="skills-container">
+      <div class="skill-category">
+        <h4><i class="fas fa-code"></i> Core Languages</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">C Programming</span>
+          <span class="skill-tag">C++ (OOP)</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Data Structures</span>
+          <span class="skill-tag">Algorithms</span>
+          <span class="skill-tag">Problem Solving</span>
         </div>
       </div>
-      <div class="skill-item" data-width="85%">
-        <div class="skill-name">
-          <span>C++ Programming</span>
-          <span>85%</span>
-        </div>
-        <div class="skill-bar-container">
-          <div class="skill-bar"></div>
-        </div>
-      </div>
-      <div class="skill-item" data-width="80%">
-        <div class="skill-name">
-          <span>Java Programming</span>
-          <span>80%</span>
-        </div>
-        <div class="skill-bar-container">
-          <div class="skill-bar"></div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-tools"></i> Development Tools</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Git & GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Linux Terminal</span>
+          <span class="skill-tag">CodeBlocks</span>
+          <span class="skill-tag">CLion</span>
+          <span class="skill-tag">Debugging Tools</span>
         </div>
       </div>
-      <div class="skill-item" data-width="85%">
-        <div class="skill-name">
-          <span>Git & Version Control</span>
-          <span>85%</span>
-        </div>
-        <div class="skill-bar-container">
-          <div class="skill-bar"></div>
-        </div>
-      </div>
-      <div class="skill-item" data-width="75%">
-        <div class="skill-name">
-          <span>Linux Environment</span>
-          <span>75%</span>
-        </div>
-        <div class="skill-bar-container">
-          <div class="skill-bar"></div>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-cogs"></i> Concepts & Methodologies</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Object-Oriented Design</span>
+          <span class="skill-tag">Software Engineering</span>
+          <span class="skill-tag">Version Control</span>
+          <span class="skill-tag">Code Optimization</span>
+          <span class="skill-tag">Testing & Debugging</span>
+          <span class="skill-tag">Documentation</span>
         </div>
       </div>
-    </div>
-    
-    <div class="tab-content" id="education">
-      <div class="education-item">
-        <h3>Computer Science & Programming</h3>
-        <div class="edu-year">Ongoing</div>
-        <p>Continuously learning and enhancing software development skills through online platforms, practical projects, and self-study.</p>
-      </div>
-      <div class="education-item">
-        <h3>Academic Background</h3>
-        <div class="edu-year">Previous Education</div>
-        <p>Strong foundation in programming concepts, algorithms, and problem-solving acquired through formal education and personal projects.</p>
-      </div>
-    </div>
-    
-    <div class="tab-content" id="interests">
-      <div class="education-item">
-        <h3>Software Development</h3>
-        <p>Building efficient applications, solving algorithmic problems, and learning new programming paradigms.</p>
-      </div>
-      <div class="education-item">
-        <h3>Open Source Contribution</h3>
-        <p>Interested in contributing to open-source projects and collaborating with other developers.</p>
-      </div>
-      <div class="education-item">
-        <h3>Technology Learning</h3>
-        <p>Continuously exploring new tools, frameworks, and best practices in software development.</p>
+      
+      <div class="skill-category">
+        <h4><i class="fas fa-rocket"></i> Currently Learning</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Web Development</span>
+          <span class="skill-tag">Database Systems</span>
+          <span class="skill-tag">System Design</span>
+          <span class="skill-tag">Cloud Computing</span>
+          <span class="skill-tag">DevOps Basics</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="projects-section" id="projects">
-  <h2>My Projects</h2>
+  <h2 data-aos="fade-up">My Projects</h2>
   <div class="projects-container">
-    <div class="proj-card">
+    <div class="proj-card" data-aos="fade-up" data-aos-delay="100">
       <h3>DNA & RNA Sequence Analyzer <span class="project-tag">SDP 101</span></h3>
       <div class="proj-tech">
         <span class="tech-tag">C++</span>
         <span class="tech-tag">Bioinformatics</span>
         <span class="tech-tag">Algorithms</span>
+        <span class="tech-tag">File I/O</span>
       </div>
-      <p>A bioinformatics tool that analyzes DNA and RNA sequences. Features include sequence alignment, GC content calculation, motif finding, and mutation detection.</p>
+      <p>A comprehensive bioinformatics tool for DNA/RNA sequence analysis with features like sequence alignment, GC content calculation, motif finding, and mutation detection using efficient algorithms.</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank">View Code</a>
-        <a href="#contact">Learn More</a>
+        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
+        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
       </div>
     </div>
     
-    <div class="proj-card">
+    <div class="proj-card" data-aos="fade-up" data-aos-delay="200">
       <h3>Automatic Street Light Control <span class="project-tag">EEE 101</span></h3>
       <div class="proj-tech">
         <span class="tech-tag">Arduino</span>
         <span class="tech-tag">C++</span>
         <span class="tech-tag">IR Sensor</span>
         <span class="tech-tag">Embedded Systems</span>
+        <span class="tech-tag">IoT</span>
       </div>
-      <p>An energy-efficient automatic street light system using IR sensors to detect vehicle/pedestrian movement. Lights turn on automatically when motion is detected.</p>
+      <p>An energy-efficient smart street light system using IR sensors for motion detection. Features automatic on/off switching, light intensity adjustment, and power optimization algorithms.</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank">View Code</a>
-        <a href="#contact">Learn More</a>
+        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
+        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
       </div>
     </div>
     
-    <div class="proj-card">
+    <div class="proj-card" data-aos="fade-up" data-aos-delay="300">
       <h3>Bank Management System</h3>
       <div class="proj-tech">
         <span class="tech-tag">C++</span>
         <span class="tech-tag">OOP</span>
         <span class="tech-tag">File Handling</span>
+        <span class="tech-tag">Data Structures</span>
       </div>
-      <p>A console-based banking application implementing OOP concepts with features like account management, transactions, and user authentication.</p>
+      <p>A secure console-based banking application implementing advanced OOP concepts with features like account management, transaction processing, user authentication, and data encryption.</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank">View Code</a>
-        <a href="#contact">Learn More</a>
+        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
+        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
       </div>
     </div>
     
-    <div class="proj-card">
+    <div class="proj-card" data-aos="fade-up" data-aos-delay="400">
       <h3>Student Record System</h3>
       <div class="proj-tech">
         <span class="tech-tag">Java</span>
         <span class="tech-tag">File I/O</span>
         <span class="tech-tag">Data Structures</span>
+        <span class="tech-tag">GUI (Swing)</span>
       </div>
-      <p>Java application for managing student records with features like add, delete, update, search, and save data to files.</p>
+      <p>Java desktop application for comprehensive student record management with CRUD operations, search functionality, grade calculation, and report generation features.</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank">View Code</a>
-        <a href="#contact">Learn More</a>
+        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
+        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
       </div>
     </div>
   </div>
 </section>
 
 <section class="contact-section" id="contact">
-  <div class="message-card">
-    <h3>Send Message</h3>
+  <div class="message-card" data-aos="fade-right">
+    <h3><i class="fas fa-paper-plane"></i> Send Message</h3>
     <form id="contactForm">
       <input type="text" id="name" placeholder="Your Name" required>
       <input type="email" id="email" placeholder="Your Email" required>
       <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="button" onclick="sendMessage()">Send Message</button>
+      <button type="button" onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send Message</button>
     </form>
   </div>
   
-  <div class="contact-card">
-    <h3>Contact Info</h3>
-    <p><strong>📧 Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
-    <p><strong>📱 Phone:</strong> <a href="tel:+8801756644097">+880 1756-644097</a></p>
-    <p><strong>💻 GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
-    <p><strong>👔 LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
-    <p><strong>📍 Location:</strong> Dhaka, Bangladesh</p>
-    <p><strong>✅ Availability:</strong> Open to collaborations</p>
+  <div class="contact-card" data-aos="fade-left">
+    <h3><i class="fas fa-address-card"></i> Contact Info</h3>
+    <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
+    <p><strong><i class="fas fa-phone"></i> Phone:</strong> <a href="tel:+8801756644097">+880 1756-644097</a></p>
+    <p><strong><i class="fab fa-github"></i> GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
+    <p><strong><i class="fab fa-linkedin"></i> LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
+    <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Dhaka, Bangladesh</p>
+    <p><strong><i class="fas fa-user-check"></i> Availability:</strong> Open to collaborations</p>
     
     <div class="contact-icons">
       <a href="https://github.com/imran8380" target="_blank" title="GitHub">
@@ -452,6 +591,13 @@ body.light-theme .skill-bar-container{background:#e0e0e0;}
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
 <script>
+// Initialize AOS Animation
+AOS.init({
+  duration: 1000,
+  once: true,
+  offset: 100
+});
+
 // Particles.js Configuration
 particlesJS("particles-js", {
   particles: {
@@ -478,6 +624,151 @@ particlesJS("particles-js", {
   }
 });
 
+// Analytics Charts
+document.addEventListener('DOMContentLoaded', function() {
+  // Activity Chart (Bar Chart)
+  const activityCtx = document.getElementById('activityChart').getContext('2d');
+  const activityChart = new Chart(activityCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Code Hours',
+        data: [4, 6, 5, 8, 7, 3, 5],
+        backgroundColor: 'rgba(0, 180, 216, 0.6)',
+        borderColor: 'rgba(0, 180, 216, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        },
+        x: {
+          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#fff' }
+        }
+      }
+    }
+  });
+
+  // Project Completion Chart (Doughnut)
+  const projectCtx = document.getElementById('projectChart').getContext('2d');
+  const projectChart = new Chart(projectCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Completed', 'In Progress', 'Planned'],
+      datasets: [{
+        data: [65, 25, 10],
+        backgroundColor: [
+          'rgba(0, 180, 216, 0.8)',
+          'rgba(0, 180, 216, 0.5)',
+          'rgba(0, 180, 216, 0.2)'
+        ],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: '#fff' }
+        }
+      }
+    }
+  });
+
+  // Learning Progress Chart (Line)
+  const learningCtx = document.getElementById('learningChart').getContext('2d');
+  const learningChart = new Chart(learningCtx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [{
+        label: 'Skill Level',
+        data: [40, 45, 55, 65, 75, 85],
+        borderColor: 'rgba(0, 180, 216, 1)',
+        backgroundColor: 'rgba(0, 180, 216, 0.1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        },
+        x: {
+          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#fff' }
+        }
+      }
+    }
+  });
+
+  // Skills Radar Chart
+  const skillsRadarCtx = document.getElementById('skillsRadarChart').getContext('2d');
+  const skillsRadarChart = new Chart(skillsRadarCtx, {
+    type: 'radar',
+    data: {
+      labels: ['C/C++', 'Java', 'Algorithms', 'Git/GitHub', 'Linux', 'Problem Solving', 'OOP', 'Debugging'],
+      datasets: [{
+        label: 'Current Skills',
+        data: [90, 80, 85, 85, 75, 90, 85, 80],
+        backgroundColor: 'rgba(0, 180, 216, 0.2)',
+        borderColor: 'rgba(0, 180, 216, 1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(0, 180, 216, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+          grid: { color: 'rgba(255, 255, 255, 0.1)' },
+          pointLabels: { color: '#fff' },
+          ticks: {
+            backdropColor: 'transparent',
+            color: '#fff'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: { color: '#fff' }
+        }
+      }
+    }
+  });
+
+  // Animate progress bars
+  const progressBars = document.querySelectorAll('.progress-fill');
+  progressBars.forEach(bar => {
+    const width = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => {
+      bar.style.width = width;
+    }, 500);
+  });
+});
+
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 themeToggle.addEventListener('click', () => {
@@ -491,48 +782,6 @@ if(localStorage.getItem('theme') === 'light') {
   document.body.classList.add('light-theme');
   themeToggle.classList.add('active');
 }
-
-// Tabs functionality
-const tabButtons = document.querySelectorAll('.tab-buttons button');
-const tabContents = document.querySelectorAll('.tab-content');
-
-tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const tab = btn.getAttribute('data-tab');
-    tabContents.forEach(tc => tc.classList.remove('active'));
-    document.getElementById(tab).classList.add('active');
-    
-    // Animate skill bars when skills tab is clicked
-    if(tab === 'skills') {
-      setTimeout(animateSkillBars, 300);
-    }
-  });
-});
-
-// Animate skill bars
-function animateSkillBars() {
-  const skillItems = document.querySelectorAll('.skill-item');
-  skillItems.forEach((item, index) => {
-    setTimeout(() => {
-      item.classList.add('animated');
-      const width = item.getAttribute('data-width');
-      const skillBar = item.querySelector('.skill-bar');
-      skillBar.style.width = width;
-    }, index * 200);
-  });
-}
-
-// Initialize skill bars on page load
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    const activeTab = document.querySelector('.tab-content.active');
-    if(activeTab && activeTab.id === 'skills') {
-      animateSkillBars();
-    }
-  }, 1000);
-});
 
 // Navbar scroll shadow
 window.addEventListener('scroll', () => {
@@ -599,29 +848,6 @@ function sendMessage() {
   }
 }
 
-// Add shine animation
-const style = document.createElement('style');
-style.textContent = `
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-@keyframes shine {
-  0% { transform: rotate(45deg) translate(-25%, -25%); }
-  100% { transform: rotate(45deg) translate(25%, 25%); }
-}
-`;
-document.head.appendChild(style);
-
-// Add hover sound effect (optional)
-document.querySelectorAll('.btn, .proj-links a, .contact-icons a').forEach(element => {
-  element.addEventListener('mouseenter', () => {
-    // Create subtle hover sound effect
-    element.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-  });
-});
-
 // Add typing cursor animation
 const typewriter = document.querySelector('.typewriter');
 setTimeout(() => {
@@ -631,11 +857,42 @@ setTimeout(() => {
 // Check if profile image loads successfully
 const profileImg = document.querySelector('.about img');
 profileImg.onerror = function() {
-  // If image fails to load, show placeholder
+  // Backup image link
   this.src = 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=420&h=520&q=80';
-  this.alt = 'Profile Image - Failed to load original';
-  console.log('Profile image failed to load, showing placeholder.');
+  this.alt = 'Profile Image - Loaded backup image';
 };
+
+// Animate statistics on scroll
+const observerOptions = {
+  threshold: 0.5
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const statNumbers = entry.target.querySelectorAll('.stat-number');
+      statNumbers.forEach(stat => {
+        const targetValue = parseInt(stat.textContent);
+        let current = 0;
+        const increment = targetValue / 50;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= targetValue) {
+            stat.textContent = targetValue;
+            clearInterval(timer);
+          } else {
+            stat.textContent = Math.floor(current);
+          }
+        }, 30);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Observe analytics section
+const analyticsSection = document.querySelector('.analytics-section');
+observer.observe(analyticsSection);
 </script>
 
 </body>
