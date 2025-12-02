@@ -6,18 +6,10 @@
 <title>Imran | Software Developer Portfolio</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<!-- Chart.js for Analytics -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- AOS Animation Library -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <style>
 /* Basic Reset and Fonts */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{background:#0d0d0d;color:white;overflow-x:hidden;transition:background 0.5s, color 0.5s;}
-
-/* Floating Particles Background */
-#particles-js{position:fixed;width:100%;height:100%;z-index:-1;}
 
 /* Theme Toggle */
 .theme-toggle{position:fixed;top:30px;right:30px;z-index:1001;display:flex;align-items:center;gap:10px;}
@@ -38,149 +30,88 @@ nav ul li a:hover{color:#00b4d8;}
 
 /* Hero Section */
 .hero{width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 60px;position:relative;}
-.hero h1{font-size:3.5rem;font-weight:700;margin-top:50px;color:white;opacity:0;animation:fadeInUp 1s forwards 0.5s;}
-.hero h1 span{color:#00b4d8;position:relative;display:inline-block;}
-.hero h1 span:after{content:'';position:absolute;width:100%;height:2px;background:#00b4d8;bottom:0;left:0;transform:scaleX(0);animation:underline 1s forwards 1.5s;}
-.hero h2{font-size:2.5rem;font-weight:600;margin:20px 0;color:#fff;opacity:0;animation:fadeInUp 1s forwards 0.8s;}
-.hero p{font-size:1.2rem;max-width:600px;margin-bottom:30px;color:#ccc;line-height:1.6;opacity:0;animation:fadeInUp 1s forwards 1.1s;}
-.btns{display:flex;gap:20px;margin-top:30px;opacity:0;animation:fadeInUp 1s forwards 1.4s;}
-.btn{display:inline-block;padding:14px 26px;border-radius:14px;font-weight:600;cursor:pointer;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);color:#fff;border:none;background:linear-gradient(135deg,#00b4d8,#0077b6);box-shadow:0 4px 12px rgba(0,180,216,0.35);text-decoration:none;position:relative;overflow:hidden;z-index:1;}
-.btn:before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:0.5s;z-index:-1;}
-.btn:hover:before{left:100%;}
-.btn:hover{transform:translateY(-5px) scale(1.05);box-shadow:0 8px 25px rgba(0,180,216,0.55);}
+.hero h1{font-size:3.5rem;font-weight:700;margin-top:50px;color:white;}
+.hero h1 span{color:#00b4d8;}
+.hero h2{font-size:2.5rem;font-weight:600;margin:20px 0;color:#fff;}
+.hero p{font-size:1.2rem;max-width:600px;margin-bottom:30px;color:#ccc;line-height:1.6;}
+.btns{display:flex;gap:20px;margin-top:30px;}
+.btn{display:inline-block;padding:14px 26px;border-radius:14px;font-weight:600;cursor:pointer;transition:all 0.4s;color:#fff;border:none;background:linear-gradient(135deg,#00b4d8,#0077b6);box-shadow:0 4px 12px rgba(0,180,216,0.35);text-decoration:none;position:relative;overflow:hidden;z-index:1;}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,180,216,0.55);}
 .btn.ghost{background:transparent;border:2px solid #00b4d8;color:#00b4d8;box-shadow:none;}
-.btn.ghost:hover{background:rgba(0,180,216,0.15);color:#fff;transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,180,216,0.4);}
-
-/* Floating elements */
-.floating{position:absolute;animation:float 6s ease-in-out infinite;}
-.floating:nth-child(1){top:20%;left:10%;font-size:2rem;color:rgba(0,180,216,0.1);}
-.floating:nth-child(2){top:60%;right:15%;font-size:1.5rem;color:rgba(0,180,216,0.1);animation-delay:2s;}
-.floating:nth-child(3){bottom:30%;left:20%;font-size:1.2rem;color:rgba(0,180,216,0.1);animation-delay:4s;}
-
-/* Analytics Dashboard */
-.analytics-section{padding:80px 60px;background:#111;position:relative;}
-.analytics-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
-.analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;margin-bottom:50px;}
-.analytics-card{background:#1a1a1a;border-radius:20px;padding:30px;border:1px solid #333;transition:0.3s;}
-.analytics-card:hover{transform:translateY(-5px);border-color:#00b4d8;box-shadow:0 10px 25px rgba(0,180,216,0.2);}
-.analytics-card h3{color:#00b4d8;margin-bottom:20px;font-size:1.5rem;}
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
-.stat-item{text-align:center;padding:15px;background:#222;border-radius:12px;transition:0.3s;}
-.stat-item:hover{transform:translateY(-3px);background:#252525;}
-.stat-number{font-size:2rem;font-weight:700;color:#00b4d8;}
-.stat-label{font-size:0.9rem;color:#888;margin-top:5px;}
-
-/* Skills Radar Chart Container */
-.skills-chart-container{background:#1a1a1a;border-radius:20px;padding:30px;margin-top:30px;border:1px solid #333;}
-
-/* GitHub Stats Section */
-.github-stats{padding:60px;background:#0d0d0d;}
-.github-stats h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
-.stats-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
-.stat-card{background:linear-gradient(135deg,#1a1a1a,#252525);border-radius:15px;padding:25px;text-align:center;border:1px solid #333;transition:0.3s;}
-.stat-card:hover{transform:translateY(-5px);border-color:#00b4d8;box-shadow:0 10px 25px rgba(0,180,216,0.2);}
-.stat-card i{font-size:2.5rem;color:#00b4d8;margin-bottom:15px;}
-.stat-card h3{font-size:1.5rem;margin-bottom:10px;color:white;}
-.stat-card p{color:#aaa;font-size:0.9rem;}
+.btn.ghost:hover{background:rgba(0,180,216,0.15);color:#fff;transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,180,216,0.4);}
 
 /* About Section */
 .about{width:100%;padding:120px 60px;display:flex;gap:60px;align-items:center;flex-wrap:wrap;position:relative;overflow:hidden;}
-.about:before{content:'</>';position:absolute;font-size:15rem;color:rgba(0,180,216,0.03);right:-50px;bottom:-50px;transform:rotate(15deg);}
-.about img{width:420px;height:520px;object-fit:cover;border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:transform 0.5s;animation:fadeInLeft 1s forwards;}
-.about img:hover{transform:scale(1.02) rotate(1deg);}
-.about .text-box{max-width:650px;opacity:0;animation:fadeInRight 1s forwards 0.5s;}
-.about h2{font-size:3rem;margin-bottom:20px;color:#00b4d8;position:relative;display:inline-block;}
-.about h2:after{content:'';position:absolute;width:50%;height:3px;background:linear-gradient(90deg,#00b4d8,transparent);bottom:-10px;left:0;}
+.about img{width:420px;height:520px;object-fit:cover;border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.5);transition:transform 0.5s;}
+.about img:hover{transform:scale(1.02);}
+.about .text-box{max-width:650px;}
+.about h2{font-size:3rem;margin-bottom:20px;color:#00b4d8;}
 .about p{font-size:1.1rem;line-height:1.7;margin-bottom:30px;}
 
-/* Enhanced Skills Section */
-.skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;}
-.skill-category{background:#1a1a1a;border-radius:15px;padding:25px;border-left:4px solid #00b4d8;transition:0.3s;}
-.skill-category:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,180,216,0.2);}
-.skill-category h4{color:#00b4d8;margin-bottom:15px;font-size:1.3rem;}
-.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
-.skill-tag{background:#333;color:#00b4d8;padding:8px 15px;border-radius:20px;font-size:0.9rem;transition:0.3s;position:relative;overflow:hidden;}
-.skill-tag:after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(0,180,216,0.2),transparent);transition:0.5s;}
-.skill-tag:hover:after{left:100%;}
-.skill-tag:hover{background:#00b4d8;color:white;transform:translateY(-3px);}
+/* Skills Section - Realistic */
+.skills-section{padding:80px 60px;background:#111;}
+.skills-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
+.skill-card{background:#1a1a1a;border-radius:15px;padding:25px;border-left:4px solid #00b4d8;}
+.skill-card h3{color:#00b4d8;margin-bottom:15px;font-size:1.4rem;}
+.skill-items{display:flex;flex-wrap:wrap;gap:12px;}
+.skill-item{background:#333;color:#00b4d8;padding:8px 16px;border-radius:20px;font-size:0.9rem;transition:0.3s;}
+.skill-item:hover{background:#00b4d8;color:white;transform:translateY(-2px);}
 
-/* Projects Section */
-.projects-section{padding:80px 60px;background:#111;position:relative;overflow:hidden;}
-.projects-section:before{content:'{ }';position:absolute;font-size:12rem;color:rgba(0,180,216,0.03);left:-30px;top:50%;transform:translateY(-50%) rotate(-15deg);}
-.projects-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;position:relative;display:inline-block;left:50%;transform:translateX(-50%);}
-.projects-section h2:after{content:'';position:absolute;width:100%;height:3px;background:linear-gradient(90deg,transparent,#00b4d8,transparent);bottom:-10px;left:0;}
+/* Real GitHub Stats */
+.github-real-stats{padding:60px;background:#0d0d0d;}
+.github-real-stats h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
+.stats-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-bottom:50px;}
+.stat-box{background:#1a1a1a;border-radius:15px;padding:30px;text-align:center;border:1px solid #333;transition:0.3s;}
+.stat-box:hover{transform:translateY(-5px);border-color:#00b4d8;}
+.stat-box i{font-size:2.5rem;color:#00b4d8;margin-bottom:15px;}
+.stat-box h3{font-size:1.5rem;margin-bottom:10px;}
+.stat-box p{color:#aaa;font-size:0.9rem;}
+
+/* Coding Journey */
+.journey-section{padding:80px 60px;background:#111;}
+.journey-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
+.timeline{max-width:800px;margin:0 auto;position:relative;}
+.timeline:before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:#00b4d8;transform:translateX(-50%);}
+.timeline-item{display:flex;margin-bottom:40px;position:relative;}
+.timeline-item:nth-child(odd){flex-direction:row-reverse;}
+.timeline-content{background:#1a1a1a;border-radius:10px;padding:20px;width:45%;border:1px solid #333;}
+.timeline-content h3{color:#00b4d8;margin-bottom:10px;}
+.timeline-content .date{color:#888;font-size:0.9rem;margin-bottom:10px;}
+.timeline-dot{position:absolute;left:50%;top:20px;width:20px;height:20px;background:#00b4d8;border-radius:50%;transform:translateX(-50%);border:4px solid #0d0d0d;}
+
+/* Projects Section - Real Projects Only */
+.projects-section{padding:80px 60px;background:#0d0d0d;}
+.projects-section h2{font-size:2.8rem;margin-bottom:40px;color:#00b4d8;text-align:center;}
 .projects-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
-.proj-card{background:#1a1a1a;border-radius:20px;padding:30px;transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);border:1px solid #333;position:relative;overflow:hidden;}
-.proj-card:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(45deg,transparent,rgba(0,180,216,0.1),transparent);transform:translateX(-100%);transition:0.5s;}
-.proj-card:hover:before{transform:translateX(100%);}
-.proj-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 15px 30px rgba(0,180,216,0.2);border-color:#00b4d8;}
+.proj-card{background:#1a1a1a;border-radius:20px;padding:30px;transition:0.3s;border:1px solid #333;}
+.proj-card:hover{transform:translateY(-5px);border-color:#00b4d8;}
 .proj-card h3{color:#00b4d8;margin-bottom:15px;font-size:1.5rem;}
-.proj-card h3 .project-tag{background:#0077b6;color:white;font-size:0.8rem;padding:3px 8px;border-radius:4px;margin-left:10px;vertical-align:middle;}
 .proj-card p{color:#ccc;line-height:1.6;margin-bottom:20px;}
-.proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;}
-.tech-tag{background:#333;color:#00b4d8;padding:5px 12px;border-radius:15px;font-size:0.85rem;transition:0.3s;}
-.tech-tag:hover{background:#00b4d8;color:white;transform:translateY(-2px);}
 .proj-links{display:flex;gap:10px;}
-.proj-links a{padding:10px 16px;border-radius:12px;font-weight:600;background:linear-gradient(135deg,#00b4d8,#0077b6);color:#fff;text-decoration:none;transition:0.4s;font-size:0.9rem;position:relative;overflow:hidden;}
-.proj-links a:after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.2);border-radius:50%;transform:translate(-50%,-50%);transition:0.5s;}
-.proj-links a:hover:after{width:150px;height:150px;}
-.proj-links a:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,180,216,0.4);}
+.proj-links a{padding:10px 16px;border-radius:12px;font-weight:600;background:linear-gradient(135deg,#00b4d8,#0077b6);color:#fff;text-decoration:none;transition:0.3s;font-size:0.9rem;}
+.proj-links a:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,180,216,0.4);}
 
 /* Contact Section */
-.contact-section{padding:100px 60px;display:flex;flex-wrap:wrap;justify-content:center;gap:50px;position:relative;}
-.contact-card,.message-card{background:#1a1a1a;padding:40px;border-radius:20px;flex:1 1 350px;max-width:400px;box-shadow:0 10px 30px rgba(0,0,0,0.4);transition:transform 0.3s;position:relative;overflow:hidden;border:1px solid #333;}
-.contact-card:hover,.message-card:hover{transform:translateY(-5px);border-color:#00b4d8;}
-.contact-card:before,.message-card:before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:linear-gradient(to bottom,#00b4d8,#0077b6);}
+.contact-section{padding:100px 60px;display:flex;flex-wrap:wrap;justify-content:center;gap:50px;}
+.contact-card,.message-card{background:#1a1a1a;padding:40px;border-radius:20px;flex:1 1 350px;max-width:400px;border:1px solid #333;}
 .contact-card h3,.message-card h3{color:#00b4d8;margin-bottom:25px;text-align:center;font-size:1.8rem;}
-.contact-card p{margin-bottom:15px;font-size:1.1rem;display:flex;align-items:center;gap:10px;}
-.contact-card p strong{color:#00b4d8;min-width:90px;}
-.contact-card a{color:#00b4d8;text-decoration:none;transition:0.3s;position:relative;}
-.contact-card a:after{content:'';position:absolute;width:0;height:1px;background:#00b4d8;bottom:0;left:0;transition:0.3s;}
-.contact-card a:hover:after{width:100%;}
-.contact-card a:hover{color:#ffffff;}
+.contact-card p{margin-bottom:15px;font-size:1.1rem;}
+.contact-card a{color:#00b4d8;text-decoration:none;}
+.contact-card a:hover{text-decoration:underline;}
 .contact-icons{text-align:center;margin-top:30px;}
-.contact-icons a{margin:0 12px;color:white;font-size:1.8em;transition:0.4s;display:inline-block;}
-.contact-icons a:hover{color:#00b4d8;transform:translateY(-8px) scale(1.2);}
-.fa-whatsapp:hover{color:#25D366 !important;}
-.message-card input,.message-card textarea{width:100%;padding:14px;margin-bottom:20px;border-radius:8px;border:1px solid #333;background:#222;color:white;font-size:1rem;transition:0.3s;}
-.message-card input:focus,.message-card textarea:focus{outline:none;border-color:#00b4d8;box-shadow:0 0 10px rgba(0,180,216,0.3);}
-.message-card button{background:linear-gradient(135deg,#00b4d8,#0077b6);color:white;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;transition:0.4s;width:100%;font-weight:600;font-size:1.1em;position:relative;overflow:hidden;}
-.message-card button:after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.2);border-radius:50%;transform:translate(-50%,-50%);transition:0.5s;}
-.message-card button:hover:after{width:300px;height:300px;}
-.message-card button:hover{background:#0077b6;transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,180,216,0.4);}
+.contact-icons a{margin:0 12px;color:white;font-size:1.8em;transition:0.3s;}
+.contact-icons a:hover{color:#00b4d8;}
+.message-card input,.message-card textarea{width:100%;padding:14px;margin-bottom:20px;border-radius:8px;border:1px solid #333;background:#222;color:white;font-size:1rem;}
+.message-card button{background:linear-gradient(135deg,#00b4d8,#0077b6);color:white;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;transition:0.3s;width:100%;font-weight:600;font-size:1.1em;}
+.message-card button:hover{background:#0077b6;}
 
 /* Footer */
-footer{background:#111;padding:40px 60px;text-align:center;border-top:1px solid #333;position:relative;overflow:hidden;}
-footer:before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#00b4d8,#0077b6,transparent);}
+footer{background:#111;padding:40px 60px;text-align:center;border-top:1px solid #333;}
 footer p{color:#888;margin-bottom:10px;}
 footer .footer-icons{margin-top:20px;}
-footer .footer-icons a{margin:0 15px;color:#888;font-size:1.5em;transition:0.4s;display:inline-block;}
-footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2);}
-
-/* Scroll to top button */
-#scrollTop{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:#00b4d8;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.5rem;cursor:pointer;transition:0.3s;opacity:0;visibility:hidden;z-index:1000;box-shadow:0 5px 15px rgba(0,180,216,0.3);}
-#scrollTop.show{opacity:1;visibility:visible;}
-#scrollTop:hover{background:#0077b6;transform:translateY(-5px);}
-
-/* Animations */
-@keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeInLeft{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes fadeInRight{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes slideInRight{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
-@keyframes underline{from{transform:scaleX(0);}to{transform:scaleX(1);}}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-20px);}}
-@keyframes typing{from{width:0;}to{width:100%;}}
-@keyframes blink{50%{border-color:transparent;}}
-@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
-@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(0,180,216,0.5);}50%{box-shadow:0 0 20px rgba(0,180,216,0.8);}}
-
-/* Typewriter effect */
-.typewriter{overflow:hidden;border-right:3px solid #00b4d8;white-space:nowrap;animation:typing 3.5s steps(40,end),blink 0.75s step-end infinite;}
-
-/* Progress Bar Animation */
-.progress-bar{height:10px;background:#333;border-radius:5px;overflow:hidden;margin-top:10px;}
-.progress-fill{height:100%;background:linear-gradient(90deg,#00b4d8,#0077b6);border-radius:5px;width:0;transition:width 1.5s ease-in-out;}
+footer .footer-icons a{margin:0 15px;color:#888;font-size:1.5em;transition:0.3s;}
+footer .footer-icons a:hover{color:#00b4d8;}
 
 /* Responsive */
 @media(max-width:900px){
@@ -191,12 +122,10 @@ footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2)
   .hero h2{font-size:2rem;}
   .about{padding:80px 30px;flex-direction:column;text-align:center;}
   .about img{width:90%;height:auto;max-width:400px;}
-  .analytics-section,.github-stats,.projects-section,.contact-section{padding:60px 30px;}
-  .btns{flex-direction:column;align-items:center;}
-  .btn{width:100%;max-width:250px;text-align:center;}
-  .contact-card p{flex-direction:column;align-items:flex-start;gap:5px;}
-  .contact-card p strong{min-width:auto;}
-  .floating{display:none;}
+  .timeline:before{left:30px;}
+  .timeline-item{flex-direction:row;}
+  .timeline-content{width:calc(100% - 60px);margin-left:50px;}
+  .timeline-dot{left:30px;}
 }
 @media(max-width:600px){
   nav ul{display:none;}
@@ -204,349 +133,203 @@ footer .footer-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2)
   .hero h2{font-size:1.5rem;}
   .about h2{font-size:2.5rem;}
   .contact-card,.message-card{padding:30px 20px;}
-  .projects-container,.analytics-grid,.stats-cards{grid-template-columns:1fr;}
-  .theme-toggle{top:20px;right:20px;}
-  .skills-container{grid-template-columns:1fr;}
+  .projects-container{grid-template-columns:1fr;}
 }
-
-/* Light Theme */
-body.light-theme{background:#f5f5f5;color:#333;}
-body.light-theme nav{background:rgba(255,255,255,0.95);box-shadow:0 4px 20px rgba(0,0,0,0.1);}
-body.light-theme nav ul li a{color:#333;}
-body.light-theme .hero h1,.body.light-theme .hero h2{color:#222;}
-body.light-theme .hero p{color:#555;}
-body.light-theme .about:before{color:rgba(0,180,216,0.08);}
-body.light-theme .proj-card,.body.light-theme .contact-card,.body.light-theme .message-card,.body.light-theme .skill-category,.body.light-theme .analytics-card,.body.light-theme .stat-card{background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.1);border-color:#e0e0e0;}
-body.light-theme .proj-card p,.body.light-theme .contact-card p{color:#555;}
-body.light-theme footer{background:#fff;border-top-color:#e0e0e0;}
-body.light-theme footer p{color:#666;}
-body.light-theme .stat-item{background:#f0f0f0;}
-body.light-theme .skill-tag{background:#e0e0e0;}
-body.light-theme .progress-bar{background:#e0e0e0;}
 </style>
 </head>
 <body>
-
-<!-- Particles Background -->
-<div id="particles-js"></div>
-
-<!-- Theme Toggle -->
-<div class="theme-toggle">
-  <button class="toggle-btn" id="themeToggle"></button>
-  <span class="theme-label">Theme</span>
-</div>
-
-<!-- Scroll to Top -->
-<div id="scrollTop">
-  <i class="fas fa-arrow-up"></i>
-</div>
 
 <nav id="navbar">
   <div class="logo">Imran<span> | Developer</span></div>
   <ul>
     <li><a href="#hero">Home</a></li>
-    <li><a href="#analytics">Analytics</a></li>
-    <li><a href="#github-stats">GitHub</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
 <section class="hero" id="hero">
-  <!-- Floating elements -->
-  <div class="floating"><i class="fas fa-code"></i></div>
-  <div class="floating"><i class="fas fa-cogs"></i></div>
-  <div class="floating"><i class="fas fa-laptop-code"></i></div>
-  
   <h1>Hi, I'm <span>Imran</span></h1>
-  <h2 class="typewriter">Software Developer</h2>
+  <h2>Software Developer</h2>
   <p>Passionate about programming, problem-solving, and creating efficient software solutions. Specializing in C, C++, Java, and modern development tools.</p>
   <div class="btns">
     <a href="#contact" class="btn">Get In Touch</a>
     <a href="https://github.com/imran8380" target="_blank" class="btn ghost">View GitHub</a>
-    <a href="#projects" class="btn ghost">View Projects</a>
-  </div>
-</section>
-
-<section class="analytics-section" id="analytics">
-  <h2 data-aos="fade-up">Developer Analytics</h2>
-  <div class="analytics-grid" data-aos="fade-up" data-aos-delay="100">
-    <div class="analytics-card">
-      <h3><i class="fas fa-chart-line"></i> GitHub Statistics</h3>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number" id="repoCount">12</div>
-          <div class="stat-label">Repositories</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="commitCount">156</div>
-          <div class="stat-label">Commits</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="starCount">23</div>
-          <div class="stat-label">Stars</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="contributionCount">89</div>
-          <div class="stat-label">Contributions</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="analytics-card">
-      <h3><i class="fas fa-calendar-alt"></i> Code Activity</h3>
-      <canvas id="activityChart"></canvas>
-    </div>
-    
-    <div class="analytics-card">
-      <h3><i class="fas fa-project-diagram"></i> Project Status</h3>
-      <canvas id="projectChart"></canvas>
-    </div>
-    
-    <div class="analytics-card">
-      <h3><i class="fas fa-graduation-cap"></i> Learning Progress</h3>
-      <canvas id="learningChart"></canvas>
-    </div>
-  </div>
-  
-  <div class="skills-chart-container" data-aos="fade-up" data-aos-delay="200">
-    <h3><i class="fas fa-radar"></i> Technical Skills Radar</h3>
-    <canvas id="skillsRadarChart"></canvas>
-  </div>
-</section>
-
-<section class="github-stats" id="github-stats">
-  <h2 data-aos="fade-up">GitHub Development Skills</h2>
-  <div class="stats-cards" data-aos="fade-up" data-aos-delay="100">
-    <div class="stat-card">
-      <i class="fab fa-git-alt"></i>
-      <h3>Git Mastery</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 85%"></div>
-      </div>
-      <p>Branch management, merging, conflict resolution</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-code-branch"></i>
-      <h3>Version Control</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 90%"></div>
-      </div>
-      <p>Commit strategies, pull requests, code reviews</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-users"></i>
-      <h3>Collaboration</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 80%"></div>
-      </div>
-      <p>Team workflow, issue tracking, documentation</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-tools"></i>
-      <h3>Development Tools</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 88%"></div>
-      </div>
-      <p>VS Code, Linux, Git, debugging tools</p>
-    </div>
-  </div>
-  
-  <div class="stats-cards" style="margin-top: 30px;" data-aos="fade-up" data-aos-delay="200">
-    <div class="stat-card">
-      <i class="fas fa-brain"></i>
-      <h3>Problem Solving</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 92%"></div>
-      </div>
-      <p>Algorithm design, debugging, optimization</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-cogs"></i>
-      <h3>OOP Concepts</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 87%"></div>
-      </div>
-      <p>Classes, inheritance, polymorphism, design patterns</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-database"></i>
-      <h3>Data Structures</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 85%"></div>
-      </div>
-      <p>Arrays, linked lists, trees, algorithms</p>
-    </div>
-    
-    <div class="stat-card">
-      <i class="fas fa-rocket"></i>
-      <h3>Continuous Learning</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 95%"></div>
-      </div>
-      <p>New technologies, frameworks, best practices</p>
-    </div>
   </div>
 </section>
 
 <section class="about" id="about">
-  <!-- আপনার নতুন প্রোফাইল ফটো -->
   <img src="https://drive.google.com/thumbnail?id=1RAsgyKVKaTkjJ25gkK0X2n7rCk3YDk2O&sz=w1000" 
        alt="Imran" 
        width="420" 
        height="520"
-       style="border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.3);object-fit:cover;transition:transform 0.5s;animation:fadeInLeft 1s forwards;"
-       onmouseover="this.style.transform='scale(1.02) rotate(1deg)'"
-       onmouseout="this.style.transform='scale(1)'"
-       data-aos="fade-right">
+       style="border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.3);object-fit:cover;">
   
-  <div class="text-box" data-aos="fade-left">
+  <div class="text-box">
     <h2>About Me</h2>
-    <p>I am <strong>Imran</strong>, a dedicated software developer with strong programming fundamentals in C, C++, and Java. I have experience with development tools like Git, VS Code, Linux, and CodeBlocks. My passion lies in turning complex problems into efficient, well-structured solutions through clean code and logical thinking.</p>
+    <p>I am <strong>Imran</strong>, a dedicated software developer with strong programming fundamentals in C, C++, and Java. I have experience with development tools like Git, VS Code, Linux, and CodeBlocks.</p>
     
-    <div class="skills-container">
-      <div class="skill-category">
-        <h4><i class="fas fa-code"></i> Core Languages</h4>
-        <div class="skill-tags">
-          <span class="skill-tag">C Programming</span>
-          <span class="skill-tag">C++ (OOP)</span>
-          <span class="skill-tag">Java</span>
-          <span class="skill-tag">Data Structures</span>
-          <span class="skill-tag">Algorithms</span>
-          <span class="skill-tag">Problem Solving</span>
-        </div>
+    <p>My journey in programming started with solving basic problems and has evolved into building complete software applications. I believe in writing clean, efficient, and maintainable code.</p>
+    
+    <p>Currently, I'm focused on enhancing my skills through practical projects and continuous learning. I'm particularly interested in software architecture, algorithms, and system design.</p>
+  </div>
+</section>
+
+<section class="skills-section" id="skills">
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Programming Languages</h3>
+      <div class="skill-items">
+        <span class="skill-item">C Programming</span>
+        <span class="skill-item">C++</span>
+        <span class="skill-item">Java</span>
+        <span class="skill-item">Data Structures</span>
+        <span class="skill-item">Algorithms</span>
       </div>
-      
-      <div class="skill-category">
-        <h4><i class="fas fa-tools"></i> Development Tools</h4>
-        <div class="skill-tags">
-          <span class="skill-tag">Git & GitHub</span>
-          <span class="skill-tag">VS Code</span>
-          <span class="skill-tag">Linux Terminal</span>
-          <span class="skill-tag">CodeBlocks</span>
-          <span class="skill-tag">CLion</span>
-          <span class="skill-tag">Debugging Tools</span>
-        </div>
+    </div>
+    
+    <div class="skill-card">
+      <h3>Development Tools</h3>
+      <div class="skill-items">
+        <span class="skill-item">Git & GitHub</span>
+        <span class="skill-item">VS Code</span>
+        <span class="skill-item">Linux</span>
+        <span class="skill-item">CodeBlocks</span>
+        <span class="skill-item">Terminal/CLI</span>
       </div>
-      
-      <div class="skill-category">
-        <h4><i class="fas fa-cogs"></i> Concepts & Methodologies</h4>
-        <div class="skill-tags">
-          <span class="skill-tag">Object-Oriented Design</span>
-          <span class="skill-tag">Software Engineering</span>
-          <span class="skill-tag">Version Control</span>
-          <span class="skill-tag">Code Optimization</span>
-          <span class="skill-tag">Testing & Debugging</span>
-          <span class="skill-tag">Documentation</span>
-        </div>
+    </div>
+    
+    <div class="skill-card">
+      <h3>Core Concepts</h3>
+      <div class="skill-items">
+        <span class="skill-item">Object-Oriented Programming</span>
+        <span class="skill-item">Problem Solving</span>
+        <span class="skill-item">Debugging</span>
+        <span class="skill-item">Version Control</span>
+        <span class="skill-item">Software Design</span>
       </div>
-      
-      <div class="skill-category">
-        <h4><i class="fas fa-rocket"></i> Currently Learning</h4>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Web Development</span>
-          <span class="skill-tag">Database Systems</span>
-          <span class="skill-tag">System Design</span>
-          <span class="skill-tag">Cloud Computing</span>
-          <span class="skill-tag">DevOps Basics</span>
-        </div>
+    </div>
+  </div>
+</section>
+
+<section class="github-real-stats" id="github-stats">
+  <h2>Development Focus</h2>
+  <div class="stats-container">
+    <div class="stat-box">
+      <i class="fas fa-code"></i>
+      <h3>Code Quality</h3>
+      <p>Focus on writing clean, readable, and efficient code</p>
+    </div>
+    
+    <div class="stat-box">
+      <i class="fas fa-lightbulb"></i>
+      <h3>Problem Solving</h3>
+      <p>Strong analytical skills and logical thinking</p>
+    </div>
+    
+    <div class="stat-box">
+      <i class="fas fa-book"></i>
+      <h3>Continuous Learning</h3>
+      <p>Always exploring new technologies and best practices</p>
+    </div>
+    
+    <div class="stat-box">
+      <i class="fas fa-project-diagram"></i>
+      <h3>Project Based</h3>
+      <p>Learning through building real projects</p>
+    </div>
+  </div>
+  
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Learning Fundamentals</h3>
+        <div class="date">Started Journey</div>
+        <p>Mastering core programming concepts, data structures, and algorithms</p>
       </div>
+      <div class="timeline-dot"></div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Project Development</h3>
+        <div class="date">Current Focus</div>
+        <p>Building practical applications to apply theoretical knowledge</p>
+      </div>
+      <div class="timeline-dot"></div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Skill Enhancement</h3>
+        <div class="date">Next Steps</div>
+        <p>Exploring advanced topics and contributing to open source</p>
+      </div>
+      <div class="timeline-dot"></div>
     </div>
   </div>
 </section>
 
 <section class="projects-section" id="projects">
-  <h2 data-aos="fade-up">My Projects</h2>
+  <h2>My Projects</h2>
   <div class="projects-container">
-    <div class="proj-card" data-aos="fade-up" data-aos-delay="100">
-      <h3>DNA & RNA Sequence Analyzer <span class="project-tag">SDP 101</span></h3>
-      <div class="proj-tech">
-        <span class="tech-tag">C++</span>
-        <span class="tech-tag">Bioinformatics</span>
-        <span class="tech-tag">Algorithms</span>
-        <span class="tech-tag">File I/O</span>
-      </div>
-      <p>A comprehensive bioinformatics tool for DNA/RNA sequence analysis with features like sequence alignment, GC content calculation, motif finding, and mutation detection using efficient algorithms.</p>
+    <div class="proj-card">
+      <h3>DNA & RNA Sequence Analyzer</h3>
+      <p>A bioinformatics tool for DNA/RNA sequence analysis with alignment algorithms and mutation detection.</p>
+      <p><strong>Technologies:</strong> C++, Algorithms, File Handling</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
-        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
+        <a href="#contact">Learn More</a>
       </div>
     </div>
     
-    <div class="proj-card" data-aos="fade-up" data-aos-delay="200">
-      <h3>Automatic Street Light Control <span class="project-tag">EEE 101</span></h3>
-      <div class="proj-tech">
-        <span class="tech-tag">Arduino</span>
-        <span class="tech-tag">C++</span>
-        <span class="tech-tag">IR Sensor</span>
-        <span class="tech-tag">Embedded Systems</span>
-        <span class="tech-tag">IoT</span>
-      </div>
-      <p>An energy-efficient smart street light system using IR sensors for motion detection. Features automatic on/off switching, light intensity adjustment, and power optimization algorithms.</p>
+    <div class="proj-card">
+      <h3>Automatic Street Light Control</h3>
+      <p>Energy-efficient street light system using IR sensors for motion detection and automatic control.</p>
+      <p><strong>Technologies:</strong> Arduino, C++, Embedded Systems</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
-        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
+        <a href="#contact">Learn More</a>
       </div>
     </div>
     
-    <div class="proj-card" data-aos="fade-up" data-aos-delay="300">
+    <div class="proj-card">
       <h3>Bank Management System</h3>
-      <div class="proj-tech">
-        <span class="tech-tag">C++</span>
-        <span class="tech-tag">OOP</span>
-        <span class="tech-tag">File Handling</span>
-        <span class="tech-tag">Data Structures</span>
-      </div>
-      <p>A secure console-based banking application implementing advanced OOP concepts with features like account management, transaction processing, user authentication, and data encryption.</p>
+      <p>Console-based banking application with account management and transaction processing features.</p>
+      <p><strong>Technologies:</strong> C++, OOP, File Management</p>
       <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
-        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
+        <a href="#contact">Learn More</a>
       </div>
     </div>
-    
-    <div class="proj-card" data-aos="fade-up" data-aos-delay="400">
-      <h3>Student Record System</h3>
-      <div class="proj-tech">
-        <span class="tech-tag">Java</span>
-        <span class="tech-tag">File I/O</span>
-        <span class="tech-tag">Data Structures</span>
-        <span class="tech-tag">GUI (Swing)</span>
-      </div>
-      <p>Java desktop application for comprehensive student record management with CRUD operations, search functionality, grade calculation, and report generation features.</p>
-      <div class="proj-links">
-        <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i> View Code</a>
-        <a href="#contact"><i class="fas fa-info-circle"></i> Learn More</a>
-      </div>
-    </div>
+  </div>
+  
+  <div style="text-align:center; margin-top:40px;">
+    <a href="https://github.com/imran8380" target="_blank" class="btn">
+      <i class="fab fa-github"></i> View All Projects on GitHub
+    </a>
   </div>
 </section>
 
 <section class="contact-section" id="contact">
-  <div class="message-card" data-aos="fade-right">
-    <h3><i class="fas fa-paper-plane"></i> Send Message</h3>
+  <div class="message-card">
+    <h3>Send Message</h3>
     <form id="contactForm">
       <input type="text" id="name" placeholder="Your Name" required>
       <input type="email" id="email" placeholder="Your Email" required>
       <textarea id="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="button" onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send Message</button>
+      <button type="button" onclick="sendMessage()">Send Message</button>
     </form>
   </div>
   
-  <div class="contact-card" data-aos="fade-left">
-    <h3><i class="fas fa-address-card"></i> Contact Info</h3>
-    <p><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
-    <p><strong><i class="fas fa-phone"></i> Phone:</strong> <a href="tel:+8801756644097">+880 1756-644097</a></p>
-    <p><strong><i class="fab fa-github"></i> GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
-    <p><strong><i class="fab fa-linkedin"></i> LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
-    <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Dhaka, Bangladesh</p>
-    <p><strong><i class="fas fa-user-check"></i> Availability:</strong> Open to collaborations</p>
+  <div class="contact-card">
+    <h3>Contact Info</h3>
+    <p><strong>Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+8801756644097">+880 1756-644097</a></p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
+    <p><strong>Location:</strong> Dhaka, Bangladesh</p>
+    <p><strong>Availability:</strong> Open to collaborations</p>
     
     <div class="contact-icons">
       <a href="https://github.com/imran8380" target="_blank" title="GitHub">
@@ -557,12 +340,6 @@ body.light-theme .progress-bar{background:#e0e0e0;}
       </a>
       <a href="https://www.linkedin.com/in/imran8380/" target="_blank" title="LinkedIn">
         <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="tel:+8801756644097" title="Phone">
-        <i class="fas fa-phone"></i>
-      </a>
-      <a href="https://wa.me/8801756644097" target="_blank" title="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
       </a>
     </div>
   </div>
@@ -587,216 +364,34 @@ body.light-theme .progress-bar{background:#e0e0e0;}
   </p>
 </footer>
 
-<!-- Particles.js Library -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
 <script>
-// Initialize AOS Animation
-AOS.init({
-  duration: 1000,
-  once: true,
-  offset: 100
-});
-
-// Particles.js Configuration
-particlesJS("particles-js", {
-  particles: {
-    number: { value: 80, density: { enable: true, value_area: 800 } },
-    color: { value: "#00b4d8" },
-    shape: { type: "circle" },
-    opacity: { value: 0.3, random: true },
-    size: { value: 3, random: true },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#00b4d8",
-      opacity: 0.2,
-      width: 1
-    },
-    move: { enable: true, speed: 2, direction: "none", random: true }
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: { enable: true, mode: "repulse" },
-      onclick: { enable: true, mode: "push" }
-    }
+// Simple contact form function
+function sendMessage() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+  
+  if(name && email && message) {
+    const mailtoLink = `mailto:imran.stu.8380@gmail.com?subject=Message from Portfolio - ${name}&body=${encodeURIComponent(
+      "Message: " + message + 
+      "\n\nFrom: " + name + 
+      "\nEmail: " + email + 
+      "\n\n--- Sent from Imran's Portfolio ---"
+    )}`;
+    window.location.href = mailtoLink;
+    document.getElementById('contactForm').reset();
+    alert('Thank you! Your message has been sent.');
+  } else {
+    alert('Please fill in all fields.');
   }
-});
-
-// Analytics Charts
-document.addEventListener('DOMContentLoaded', function() {
-  // Activity Chart (Bar Chart)
-  const activityCtx = document.getElementById('activityChart').getContext('2d');
-  const activityChart = new Chart(activityCtx, {
-    type: 'bar',
-    data: {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      datasets: [{
-        label: 'Code Hours',
-        data: [4, 6, 5, 8, 7, 3, 5],
-        backgroundColor: 'rgba(0, 180, 216, 0.6)',
-        borderColor: 'rgba(0, 180, 216, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
-        },
-        x: {
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
-        }
-      },
-      plugins: {
-        legend: {
-          labels: { color: '#fff' }
-        }
-      }
-    }
-  });
-
-  // Project Completion Chart (Doughnut)
-  const projectCtx = document.getElementById('projectChart').getContext('2d');
-  const projectChart = new Chart(projectCtx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Completed', 'In Progress', 'Planned'],
-      datasets: [{
-        data: [65, 25, 10],
-        backgroundColor: [
-          'rgba(0, 180, 216, 0.8)',
-          'rgba(0, 180, 216, 0.5)',
-          'rgba(0, 180, 216, 0.2)'
-        ],
-        borderWidth: 0
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { color: '#fff' }
-        }
-      }
-    }
-  });
-
-  // Learning Progress Chart (Line)
-  const learningCtx = document.getElementById('learningChart').getContext('2d');
-  const learningChart = new Chart(learningCtx, {
-    type: 'line',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      datasets: [{
-        label: 'Skill Level',
-        data: [40, 45, 55, 65, 75, 85],
-        borderColor: 'rgba(0, 180, 216, 1)',
-        backgroundColor: 'rgba(0, 180, 216, 0.1)',
-        borderWidth: 3,
-        fill: true,
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100,
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
-        },
-        x: {
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
-        }
-      },
-      plugins: {
-        legend: {
-          labels: { color: '#fff' }
-        }
-      }
-    }
-  });
-
-  // Skills Radar Chart
-  const skillsRadarCtx = document.getElementById('skillsRadarChart').getContext('2d');
-  const skillsRadarChart = new Chart(skillsRadarCtx, {
-    type: 'radar',
-    data: {
-      labels: ['C/C++', 'Java', 'Algorithms', 'Git/GitHub', 'Linux', 'Problem Solving', 'OOP', 'Debugging'],
-      datasets: [{
-        label: 'Current Skills',
-        data: [90, 80, 85, 85, 75, 90, 85, 80],
-        backgroundColor: 'rgba(0, 180, 216, 0.2)',
-        borderColor: 'rgba(0, 180, 216, 1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(0, 180, 216, 1)'
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        r: {
-          angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-          grid: { color: 'rgba(255, 255, 255, 0.1)' },
-          pointLabels: { color: '#fff' },
-          ticks: {
-            backdropColor: 'transparent',
-            color: '#fff'
-          }
-        }
-      },
-      plugins: {
-        legend: {
-          labels: { color: '#fff' }
-        }
-      }
-    }
-  });
-
-  // Animate progress bars
-  const progressBars = document.querySelectorAll('.progress-fill');
-  progressBars.forEach(bar => {
-    const width = bar.style.width;
-    bar.style.width = '0';
-    setTimeout(() => {
-      bar.style.width = width;
-    }, 500);
-  });
-});
-
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-theme');
-  themeToggle.classList.toggle('active');
-  localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-});
-
-// Load saved theme
-if(localStorage.getItem('theme') === 'light') {
-  document.body.classList.add('light-theme');
-  themeToggle.classList.add('active');
 }
 
-// Navbar scroll shadow
+// Navbar scroll effect
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-  
-  // Show/hide scroll to top button
-  const scrollTopBtn = document.getElementById('scrollTop');
-  if(window.scrollY > 300) {
-    scrollTopBtn.classList.add('show');
-  } else {
-    scrollTopBtn.classList.remove('show');
-  }
 });
 
-// Smooth scrolling for navigation links
+// Smooth scrolling
 document.querySelectorAll('nav a, .btn[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const href = this.getAttribute('href');
@@ -813,86 +408,17 @@ document.querySelectorAll('nav a, .btn[href^="#"]').forEach(anchor => {
   });
 });
 
-// Scroll to top button
-document.getElementById('scrollTop').addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Contact form function
-function sendMessage() {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
-  
-  if(name && email && message) {
-    const mailtoLink = `mailto:imran.stu.8380@gmail.com?subject=Message from Portfolio - ${name}&body=${encodeURIComponent(
-      "Message: " + message + 
-      "\n\nFrom: " + name + 
-      "\nEmail: " + email + 
-      "\n\n--- Sent from Imran's Portfolio ---"
-    )}`;
-    window.location.href = mailtoLink;
-    document.getElementById('contactForm').reset();
-    
-    // Show success animation
-    const button = document.querySelector('#contactForm button');
-    const originalText = button.textContent;
-    button.textContent = 'Message Sent!';
-    button.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.style.background = 'linear-gradient(135deg, #00b4d8, #0077b6)';
-    }, 2000);
-  } else {
-    alert('Please fill in all fields.');
-  }
-}
-
-// Add typing cursor animation
-const typewriter = document.querySelector('.typewriter');
-setTimeout(() => {
-  typewriter.style.borderRight = 'none';
-}, 3500);
-
-// Check if profile image loads successfully
+// Check profile image
 const profileImg = document.querySelector('.about img');
 profileImg.onerror = function() {
-  // Backup image link
-  this.src = 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=420&h=520&q=80';
-  this.alt = 'Profile Image - Loaded backup image';
+  // Simple placeholder if image fails
+  this.style.background = 'linear-gradient(135deg, #00b4d8, #0077b6)';
+  this.style.display = 'flex';
+  this.style.alignItems = 'center';
+  this.style.justifyContent = 'center';
+  this.style.color = 'white';
+  this.innerHTML = '<div style="text-align:center;"><i class="fas fa-user" style="font-size:3rem;"></i><p>Profile Image</p></div>';
 };
-
-// Animate statistics on scroll
-const observerOptions = {
-  threshold: 0.5
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const statNumbers = entry.target.querySelectorAll('.stat-number');
-      statNumbers.forEach(stat => {
-        const targetValue = parseInt(stat.textContent);
-        let current = 0;
-        const increment = targetValue / 50;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= targetValue) {
-            stat.textContent = targetValue;
-            clearInterval(timer);
-          } else {
-            stat.textContent = Math.floor(current);
-          }
-        }, 30);
-      });
-      observer.unobserve(entry.target);
-    }
-  });
-}, observerOptions);
-
-// Observe analytics section
-const analyticsSection = document.querySelector('.analytics-section');
-observer.observe(analyticsSection);
 </script>
 
 </body>
