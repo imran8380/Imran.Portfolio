@@ -230,15 +230,14 @@ body.light-theme .skill-bar-container{background:#e0e0e0;}
 </section>
 
 <section class="about" id="about">
-  <!-- Placeholder for profile image -->
-  <div style="width:420px;height:520px;background:linear-gradient(135deg,#00b4d8,#0077b6);border-radius:20px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;box-shadow:0 15px 40px rgba(0,0,0,0.3);position:relative;overflow:hidden;">
-    <div style="text-align:center;z-index:2;">
-      <i class="fas fa-user" style="font-size:4rem;margin-bottom:20px;animation:pulse 2s infinite;"></i>
-      <p>Your Profile Image</p>
-      <p style="font-size:0.9rem;margin-top:10px;">Add your photo here</p>
-    </div>
-    <div style="position:absolute;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);transform:rotate(45deg) translate(-25%,-25%);animation:shine 3s infinite;"></div>
-  </div>
+  <!-- আপনার প্রোফাইল ফটো -->
+  <img src="https://drive.google.com/thumbnail?id=1Yno42fLJp1iR4il-CE5dAFsG2Enwidnc&sz=w1000" 
+       alt="Imran" 
+       width="420" 
+       height="520"
+       style="border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,0.3);object-fit:cover;transition:transform 0.5s;animation:fadeInLeft 1s forwards;"
+       onmouseover="this.style.transform='scale(1.02) rotate(1deg)'"
+       onmouseout="this.style.transform='scale(1)'">
   
   <div class="text-box">
     <h2>About Me</h2>
@@ -628,6 +627,15 @@ const typewriter = document.querySelector('.typewriter');
 setTimeout(() => {
   typewriter.style.borderRight = 'none';
 }, 3500);
+
+// Check if profile image loads successfully
+const profileImg = document.querySelector('.about img');
+profileImg.onerror = function() {
+  // If image fails to load, show placeholder
+  this.src = 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=420&h=520&q=80';
+  this.alt = 'Profile Image - Failed to load original';
+  console.log('Profile image failed to load, showing placeholder.');
+};
 </script>
 
 </body>
