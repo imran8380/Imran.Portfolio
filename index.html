@@ -67,12 +67,14 @@ nav ul li a:hover{color:#00b4d8;}
 .contact-section{padding:100px 60px;display:flex;flex-wrap:wrap;justify-content:center;gap:50px;}
 .contact-card,.message-card{background:#1a1a1a;padding:40px;border-radius:20px;flex:1 1 350px;max-width:400px;box-shadow:0 6px 18px rgba(0,0,0,0.4);}
 .contact-card h3,.message-card h3{color:#00b4d8;margin-bottom:25px;text-align:center;font-size:1.8rem;}
-.contact-card p{margin-bottom:15px;font-size:1.1rem;}
-.contact-card a{color:#00b4d8;text-decoration:none;}
-.contact-card a:hover{text-decoration:underline;}
+.contact-card p{margin-bottom:15px;font-size:1.1rem;display:flex;align-items:center;gap:10px;}
+.contact-card p strong{color:#00b4d8;min-width:90px;}
+.contact-card a{color:#00b4d8;text-decoration:none;transition:0.3s;}
+.contact-card a:hover{color:#ffffff;text-decoration:underline;}
 .contact-icons{text-align:center;margin-top:30px;}
-.contact-icons a{margin:0 12px;color:white;font-size:1.8em;transition:0.3s;}
-.contact-icons a:hover{color:#00b4d8;transform:translateY(-5px);}
+.contact-icons a{margin:0 12px;color:white;font-size:1.8em;transition:0.3s;display:inline-block;}
+.contact-icons a:hover{color:#00b4d8;transform:translateY(-5px) scale(1.2);}
+.fa-whatsapp:hover{color:#25D366 !important;}
 .message-card input,.message-card textarea{width:100%;padding:14px;margin-bottom:20px;border-radius:8px;border:1px solid #333;background:#222;color:white;font-size:1rem;}
 .message-card input:focus,.message-card textarea:focus{outline:none;border-color:#00b4d8;}
 .message-card button{background:linear-gradient(135deg,#00b4d8,#0077b6);color:white;padding:14px 20px;border:none;border-radius:8px;cursor:pointer;transition:0.3s;width:100%;font-weight:600;font-size:1.1em;}
@@ -97,6 +99,8 @@ footer .footer-icons a:hover{color:#00b4d8;}
   .projects-section,.contact-section{padding:60px 30px;}
   .btns{flex-direction:column;align-items:center;}
   .btn{width:100%;max-width:250px;text-align:center;}
+  .contact-card p{flex-direction:column;align-items:flex-start;gap:5px;}
+  .contact-card p strong{min-width:auto;}
 }
 @media(max-width:600px){
   nav ul{display:none;}
@@ -104,6 +108,7 @@ footer .footer-icons a:hover{color:#00b4d8;}
   .hero h2{font-size:1.5rem;}
   .about h2{font-size:2.5rem;}
   .contact-card,.message-card{padding:30px 20px;}
+  .projects-container{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -186,6 +191,24 @@ footer .footer-icons a:hover{color:#00b4d8;}
           <div class="skill-bar" style="width:75%"></div>
         </div>
       </div>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>VS Code</span>
+          <span>80%</span>
+        </div>
+        <div class="skill-bar-container">
+          <div class="skill-bar" style="width:80%"></div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">
+          <span>CodeBlocks</span>
+          <span>85%</span>
+        </div>
+        <div class="skill-bar-container">
+          <div class="skill-bar" style="width:85%"></div>
+        </div>
+      </div>
     </div>
     
     <div class="tab-content" id="education">
@@ -217,7 +240,7 @@ footer .footer-icons a:hover{color:#00b4d8;}
     </div>
   </div>
   
-  <!-- Placeholder for profile image - you can add your image later -->
+  <!-- Placeholder for profile image -->
   <div style="width:420px;height:520px;background:linear-gradient(135deg,#00b4d8,#0077b6);border-radius:20px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;box-shadow:0 10px 30px rgba(0,0,0,0.5);">
     <div style="text-align:center;">
       <i class="fas fa-user" style="font-size:4rem;margin-bottom:20px;"></i>
@@ -231,8 +254,8 @@ footer .footer-icons a:hover{color:#00b4d8;}
   <h2>My Projects</h2>
   <div class="projects-container">
     <div class="proj-card">
-      <h3>Bank Management System (C++)</h3>
-      <p>A console-based banking application implementing OOP concepts with features like account management, transactions, and user authentication.</p>
+      <h3>Bank Management System</h3>
+      <p>A console-based banking application implementing OOP concepts in C++ with features like account management, transactions, balance checking, and user authentication system.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
         <a href="#contact">Learn More</a>
@@ -240,8 +263,8 @@ footer .footer-icons a:hover{color:#00b4d8;}
     </div>
     
     <div class="proj-card">
-      <h3>Student Management System (Java)</h3>
-      <p>Java application for managing student records, grades, and academic information with file handling and data persistence.</p>
+      <h3>Student Record System</h3>
+      <p>Java application for managing student records with features like add, delete, update, search, and save data to files. Implements data structures and file handling.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
         <a href="#contact">Learn More</a>
@@ -249,8 +272,8 @@ footer .footer-icons a:hover{color:#00b4d8;}
     </div>
     
     <div class="proj-card">
-      <h3>Library Management (C)</h3>
-      <p>C program for library book management system with features like book search, issue, return, and inventory management.</p>
+      <h3>Library Management System</h3>
+      <p>C program for library book management with features like book search by title/author, issue/return system, member management, and inventory tracking.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
         <a href="#contact">Learn More</a>
@@ -259,7 +282,7 @@ footer .footer-icons a:hover{color:#00b4d8;}
     
     <div class="proj-card">
       <h3>Algorithm Visualizer</h3>
-      <p>Visual representation of common algorithms (sorting, searching) to help understand their working mechanism.</p>
+      <p>Visual representation of sorting algorithms (Bubble Sort, Quick Sort, Merge Sort) to demonstrate how different algorithms work with animated comparisons.</p>
       <div class="proj-links">
         <a href="https://github.com/imran8380" target="_blank">View Code</a>
         <a href="#contact">Learn More</a>
@@ -281,17 +304,29 @@ footer .footer-icons a:hover{color:#00b4d8;}
   
   <div class="contact-card">
     <h3>Contact Info</h3>
-    <p><strong>Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
-    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
-    <p><strong>Location:</strong> Bangladesh</p>
-    <p><strong>Availability:</strong> Open to collaborations and opportunities</p>
+    <p><strong>📧 Email:</strong> <a href="mailto:imran.stu.8380@gmail.com">imran.stu.8380@gmail.com</a></p>
+    <p><strong>📱 Phone:</strong> <a href="tel:+8801756644097">+880 1756-644097</a></p>
+    <p><strong>💻 GitHub:</strong> <a href="https://github.com/imran8380" target="_blank">github.com/imran8380</a></p>
+    <p><strong>👔 LinkedIn:</strong> <a href="https://www.linkedin.com/in/imran8380/" target="_blank">linkedin.com/in/imran8380</a></p>
+    <p><strong>📍 Location:</strong> Dhaka, Bangladesh</p>
+    <p><strong>✅ Availability:</strong> Open to collaborations and opportunities</p>
     
     <div class="contact-icons">
-      <a href="https://github.com/imran8380" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="mailto:imran.stu.8380@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/imran8380/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="tel:" aria-label="Phone"><i class="fas fa-phone"></i></a>
+      <a href="https://github.com/imran8380" target="_blank" aria-label="GitHub" title="GitHub Profile">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="mailto:imran.stu.8380@gmail.com" aria-label="Email" title="Send Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/imran8380/" target="_blank" aria-label="LinkedIn" title="LinkedIn Profile">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="tel:+8801756644097" aria-label="Phone" title="Call Me">
+        <i class="fas fa-phone"></i>
+      </a>
+      <a href="https://wa.me/8801756644097" target="_blank" aria-label="WhatsApp" title="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
     </div>
   </div>
 </section>
@@ -300,10 +335,22 @@ footer .footer-icons a:hover{color:#00b4d8;}
   <p>&copy; 2024 Imran. All rights reserved.</p>
   <p>Software Developer | Programming Enthusiast</p>
   <div class="footer-icons">
-    <a href="https://github.com/imran8380" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="mailto:imran.stu.8380@gmail.com"><i class="fas fa-envelope"></i></a>
-    <a href="https://www.linkedin.com/in/imran8380/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/imran8380" target="_blank" title="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+    <a href="mailto:imran.stu.8380@gmail.com" title="Email">
+      <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/imran8380/" target="_blank" title="LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="tel:+8801756644097" title="Phone">
+      <i class="fas fa-phone"></i>
+    </a>
   </div>
+  <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">
+    Connect with me: imran.stu.8380@gmail.com | +880 1756-644097
+  </p>
 </footer>
 
 <script>
@@ -350,10 +397,15 @@ function sendMessage() {
   const message = document.getElementById('message').value;
   
   if(name && email && message) {
-    const mailtoLink = `mailto:imran.stu.8380@gmail.com?subject=Message from ${name}&body=${encodeURIComponent(message + "\n\nFrom: " + email)}`;
+    const mailtoLink = `mailto:imran.stu.8380@gmail.com?subject=Message from Portfolio - ${name}&body=${encodeURIComponent(
+      "Message: " + message + 
+      "\n\nFrom: " + name + 
+      "\nEmail: " + email + 
+      "\n\n--- Sent from Imran's Portfolio ---"
+    )}`;
     window.location.href = mailtoLink;
     document.getElementById('contactForm').reset();
-    alert('Thank you for your message! Your email client will open.');
+    alert('Thank you for your message! Redirecting to email...');
   } else {
     alert('Please fill in all fields.');
   }
@@ -373,6 +425,11 @@ function animateSkillBars() {
 
 // Trigger animation when skills tab is clicked
 document.querySelector('button[data-tab="skills"]').addEventListener('click', animateSkillBars);
+
+// Initialize skill bars animation on page load
+window.addEventListener('load', () => {
+  setTimeout(animateSkillBars, 500);
+});
 </script>
 
 </body>
